@@ -61,7 +61,7 @@ Future<String> get _iOSSimulatorId async {
     final list = value as List<Object?>;
     if (list.isNotEmpty) {
       final simulator = list.first as Map<String, Object?>;
-      if (simulator['isAvailable'] as bool) {
+      if (simulator['isAvailable'] as bool && simulator['state'] == 'Booted') {
         if (simulatorId != null) {
           throw StateError(
             'More than one available simulator found: ${devices.keys}',
@@ -101,7 +101,8 @@ Future<io.File> _takeScreenshot({
     throw io.ProcessException(
       binary,
       args,
-      'Failed to take a screenshot',
+      'Failed to take a screenshot\n\n${result.stderr}',
+      result.exitCode,
     );
   }
   return io.File(screenshotPath);
