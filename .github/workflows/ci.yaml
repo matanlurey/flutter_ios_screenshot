@@ -23,3 +23,7 @@ jobs:
       - name: Run Tests
         uses: futureware-tech/simulator-action@v3
       - run: flutter drive --driver=test/xcrun_simctl_screenshot_test.dart
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v2
+        with:
+          path: test/**/*.png

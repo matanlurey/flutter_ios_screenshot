@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 import '_goldens.dart';
 
 void main() async {
-  // autoUpdateGoldenFiles = true;
+  autoUpdateGoldenFiles = true;
 
   late final io.Directory tmpDir;
   late final FlutterDriver driver;
@@ -59,9 +59,8 @@ Future<String> get _iOSSimulatorId async {
   String? simulatorId;
   for (final value in devices.values) {
     final list = value as List<Object?>;
-    if (list.isNotEmpty) {
-      final simulator = list.first as Map<String, Object?>;
-      if (simulator['isAvailable'] as bool && simulator['state'] == 'Booted') {
+    for (final simulator in list) {
+      if (simulator is Map<String, Object?> && simulator['state'] == 'Booted') {
         if (simulatorId != null) {
           throw StateError(
             'More than one available simulator found: ${devices.keys}',
