@@ -2,7 +2,7 @@ name: flutter_ios_screenshot
 description: "An iOS app, with Flutter, that takes a screenshot."
 
 environment:
-  sdk: ^3.6.0-175.0.dev
+  sdk: ^3.5.1
 
 dependencies:
   flutter:
